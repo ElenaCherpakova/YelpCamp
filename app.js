@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const methodOverride = require('method-override');
 //layout extension instead of partials
 const ejsMate = require('ejs-mate');
-const cors = require('cors')
+
 
 const Campground = require('./models/campground')
 
@@ -27,7 +27,7 @@ const path = require('path')
 app.engine('ejs', ejsMate)
 app.set("view engine", "ejs")
 app.set("views", path.join(__dirname, "views"))
-app.use(cors())
+
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 
