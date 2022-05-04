@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const methodOverride = require('method-override');
 //layout extension instead of partials
 const ejsMate = require('ejs-mate');
-const { campgroundSchema } = require('./schemas')
+const { campgroundSchema, reviewSchema } = require('./schemas')
 const ExpressError = require("./utils/ExpressError")
 const catchAsync = require("./utils/catchAsync")
 const Review = require('./models/review')
@@ -45,6 +45,16 @@ const validateCampground = (req, res, next) => {
   }
 }
 
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body)
+  console.log(error)
+  if (error) {
+    const msg = error.details.map(el => el.message).join(",")
+    throw new ExpressError(msg, 400)
+  } else {
+    next();
+  }
+}
 
 app.get('/', (req, res) => {
   res.render('home')
@@ -91,7 +101,7 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
 }))
 
 
-app.post("/campgrounds/:id/reviews", catchAsync(async (req, res) => {
+app.post("/campgrounds/:id/reviews", validateReview, catchAsync(async (req, res) => {
   const { id } = req.params;
   const campground = await Campground.findById(id)
   const review = new Review(req.body.review)
@@ -99,7 +109,6 @@ app.post("/campgrounds/:id/reviews", catchAsync(async (req, res) => {
   await review.save()
   await campground.save()
   res.redirect(`/campgrounds/${campground._id}`)
-
 }))
 
 app.all("*", (req, res, next) => {
