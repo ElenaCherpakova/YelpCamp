@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require('method-override');
+
 //layout extension instead of partials
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
