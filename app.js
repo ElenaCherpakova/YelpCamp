@@ -31,11 +31,6 @@ db.once('open', () => {
 });
 
 
-app.get("/favicon.ico", (req, res) => {
-  res.sendStatus(404);
-  // or instead of a 404, send an actual favicon.ico file
-  // just don't let routing continue to your middleware
-});
 
 app.engine('ejs', ejsMate)
 app.set('view engine', "ejs")
@@ -67,6 +62,14 @@ passport.use(new LocalStrategy(User.authenticate()))
 
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
+
+
+//put this before middleware
+app.get("/favicon.ico", (req, res) => {
+  res.sendStatus(404);
+  // or instead of a 404, send an actual favicon.ico file??
+  // just don't let routing continue to your middleware
+});
 
 //middleware
 app.use((req, res, next)=> {
