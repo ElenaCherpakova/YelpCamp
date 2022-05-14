@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user')
 const catchAsync = require("../utils/catchAsync")
 const passport = require('passport');
+const { resetWatchers } = require('nodemon/lib/monitor/watch');
 
 router.get('/register', (req, res) => {
   res.render('users/register')
@@ -33,6 +34,12 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
   req.flash('success', `Welcome Back, ${username}!`)
   res.redirect('/campgrounds')
 
+})
+
+router.get('/logout', (req, res) => {
+  req.logout()
+  req.flash('success', "See you Soon!")
+  res.redirect('/campgrounds')
 })
 
 
