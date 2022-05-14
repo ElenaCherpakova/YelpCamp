@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user')
-
+const ignoreFavicon = require('./middleware')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
@@ -31,6 +31,11 @@ db.once('open', () => {
 });
 
 
+app.get("/favicon.ico", (req, res) => {
+  res.sendStatus(404);
+  // or instead of a 404, send an actual favicon.ico file
+  // just don't let routing continue to your middleware
+});
 
 app.engine('ejs', ejsMate)
 app.set('view engine', "ejs")
@@ -65,17 +70,19 @@ passport.deserializeUser(User.deserializeUser())
 
 //middleware
 app.use((req, res, next)=> {
-  req.
-  res.locals.currentUser = req.user
-  res.locals.success = req.flash("success")
-  res.locals.error = req.flash("error")
+  if(!['/login','/register', '/'].includes(req.originalUrl)){
+     req.session.returnTo = req.originalUrl;
+  };
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 })
 
 app.use('/', userRoutes)
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
-
+app.use(ignoreFavicon);
 
 app.get('/', (req, res) => {
   res.render('home')

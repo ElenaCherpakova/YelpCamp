@@ -6,6 +6,9 @@ const passport = require('passport');
 const { resetWatchers } = require('nodemon/lib/monitor/watch');
 
 router.get('/register', (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/campgrounds');
+  }
   res.render('users/register')
 })
 
@@ -30,6 +33,9 @@ router.post('/register', catchAsync(async (req, res, next) => {
 
 
 router.get('/login', (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/campgrounds');
+  }
   res.render('users/login')
 })
 
