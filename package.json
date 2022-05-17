@@ -29,6 +29,7 @@
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-local-mongoose": "^7.0.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "standard": "^17.0.0"
   }
 }
