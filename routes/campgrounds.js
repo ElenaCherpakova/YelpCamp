@@ -5,6 +5,8 @@ const ExpressError = require("../utils/ExpressError")
 const Campground = require('../models/campground')
 const { campgroundSchema } = require('../schemas')
 const isLoggedIn = require('../middleware')
+
+
 const validateCampground = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body)
   if (error) {
@@ -27,7 +29,8 @@ router.get('/new', isLoggedIn, (req, res) => {
 });
 
 router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
-  const campground = new Campground(req.body.campground)
+  const campground = new Campground(req.body.campground);
+  campground.author = req.user._id
   await campground.save();
   req.flash('success', "Successfully create campground")
   res.redirect(`campgrounds/${campground._id}`)
