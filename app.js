@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user')
-const ignoreFavicon = require('./middleware')
+const {ignoreFavicon} = require('./middleware')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
@@ -45,17 +45,18 @@ const sessionConfig = {
   secret: 'thisshouldbebettersecret',
   resave: false,
   saveUninitialized: true,
-    cookie: {
-      httpOnly: true,
-      expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
-      maxAge: 1000 * 60 * 60 * 24 * 7
-    }
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
 }
 app.use(session(sessionConfig))
 app.use(flash())
 
 
 
+app.use(ignoreFavicon);
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new LocalStrategy(User.authenticate()))
@@ -64,17 +65,10 @@ passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
 
-//put this before middleware
-app.get("/favicon.ico", (req, res) => {
-  res.sendStatus(404);
-  // or instead of a 404, send an actual favicon.ico file??
-  // just don't let routing continue to your middleware
-});
-
 //middleware
-app.use((req, res, next)=> {
-  if(!['/login','/register', '/'].includes(req.originalUrl)){
-     req.session.returnTo = req.originalUrl;
+app.use((req, res, next) => {
+  if (!['/login', '/register', '/'].includes(req.originalUrl)) {
+    req.session.returnTo = req.originalUrl;
   };
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
