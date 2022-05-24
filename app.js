@@ -9,7 +9,7 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user')
-const {ignoreFavicon} = require('./middleware')
+const { ignoreFavicon } = require('./middleware')
 
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')

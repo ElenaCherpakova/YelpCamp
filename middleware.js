@@ -44,12 +44,20 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   next();
 }
 
+// module.exports.ignoreFavicon = (req, res, next) => {
+//   if (req.originalUrl.includes('favicon.ico')) {
+//     res.status(204).end()
+//   }
+//   next();
+// }
+
 module.exports.ignoreFavicon = (req, res, next) => {
-  if (req.originalUrl.includes('favicon.ico')) {
-    res.status(204).end()
+  if (req.originalUrl && req.originalUrl.split('/').pop().includes('favicon')) {
+    return res.sendStatus(204);
   }
-  next();
-}
+  return next();
+};
+
 module.exports.validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body)
   if (error) {
