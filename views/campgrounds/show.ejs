@@ -1,5 +1,5 @@
 <% layout('layouts/boilerplate') %>
-
+<link rel="stylesheet" href="/stylesheets/stars.css" />
 <div class="row">
   <div class="col-6">
     <div class="card mb-3">
@@ -10,32 +10,39 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item text-muted"><%=campground.location%></li>
-        <li class="list-group-item text-muted">Submitted by <%=campground.author.username%></li>
+        <li class="list-group-item text-muted">
+          Submitted by <%=campground.author.username%>
+        </li>
         <li class="list-group-item">$<%=campground.price%>/night</li>
       </ul>
-      <% if (currentUser && campground.author.equals(currentUser._id)) { %> 
+      <% if (currentUser && campground.author.equals(currentUser._id)) { %>
       <div class="card-body">
         <a
-          class="card-link btn btn-info"
+          class="card-link btn btn-outline-primary"
           href="/campgrounds/<%=campground._id%>/edit"
-          >Edit</a
+          ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+            <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+          </svg></a
         >
         <form
           class="d-inline"
           action="/campgrounds/<%= campground._id%>?_method=DELETE"
           method="POST"
         >
-          <button class="card-link btn btn-danger">Delete</button>
+        <button class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+          <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+          <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+        </svg></button>
         </form>
       </div>
-      <% } %> 
+      <% } %>
       <div class="card-footer text-muted">
         <a href="/campgrounds">All Campgrounds</a>
       </div>
     </div>
   </div>
   <div class="col-6">
-    <% if (currentUser) { %> 
+    <% if (currentUser) { %>
     <h2>Leave a Review</h2>
     <form
       action="/campgrounds/<%=campground._id%>/reviews"
@@ -43,7 +50,7 @@
       class="mb-3 validated-form"
       novalidate
     >
-      <div class="mb-3">
+      <!-- <div class="mb-3">
         <label for="rating">Rating</label>
         <input
           class="form-range"
@@ -53,10 +60,26 @@
           name="review[rating]"
           id="rating"
         />
-      </div>
+      </div> -->
+
+      <fieldset class="starability-growRotate">
+    
+        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+        <input type="radio" id="second-rate1" name="review[rating]" value="1" />
+        <label for="second-rate1" title="Terrible">1 star</label>
+        <input type="radio" id="second-rate2" name="review[rating]" value="2" />
+        <label for="second-rate2" title="Not good">2 stars</label>
+        <input type="radio" id="second-rate3" name="review[rating]" value="3" />
+        <label for="second-rate3" title="Average">3 stars</label>
+        <input type="radio" id="second-rate4" name="review[rating]" value="4" />
+        <label for="second-rate4" title="Very good">4 stars</label>
+        <input type="radio" id="second-rate5" name="review[rating]" value="5" />
+        <label for="second-rate5" title="Amazing">5 stars</label>
+      </fieldset>
+
+
       <div class="mb-3">
-        <label class="form-label" for="body">Review</label>
-        <textarea
+        <textarea placeholder="Type your review here"
           class="form-control"
           id="body"
           name="review[body]"
@@ -68,22 +91,31 @@
       </div>
       <button class="btn btn-success">Submit</button>
     </form>
-    <% } %> 
-    <% for (let review of campground.reviews) { %>
-     
+    <% } %> <% for (let review of campground.reviews) { %>
+<div class="mb-2 mt-2">
     <div class="card">
       <div class="mb-3 card-body">
-        <h5 class="card-title">Rating: <%=review.rating %></h5>
-        <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %></h6>
-        <p class="card-text">Review: <%=review.body %></p>
-        <% if (currentUser && review.author.equals(currentUser._id)) { %> 
-        <form action="/campgrounds/<%= campground._id%>/reviews/<%=review._id%>?_method=DELETE" method="POST">
-          <button class="btn btn-sm btn-danger">Delete</button>
+        <div class="d-flex justify-content-between flex-wrap">
+        <h5 class="card-title">Review: <%=review.body %></h5>
+        <p class="starability-result" data-rating="<%=review.rating %>">Rated:<%=review.rating%> stars</p>
+      </div>
+        <p class="card-subtitle mb-2 text-muted">
+          <%= review.author.username %>
+        </p>
+        <% if (currentUser && review.author.equals(currentUser._id)) { %>
+        <form
+          action="/campgrounds/<%= campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+          method="POST"
+        >
+          <button class="btn btn-outline-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+          </svg></button>
         </form>
-        <% } %> 
+        <% } %>
       </div>
     </div>
     <% } %>
   </div>
 </div>
-
+</div>
