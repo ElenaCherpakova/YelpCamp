@@ -6,7 +6,7 @@ const campgrounds = require("../controllers/campgrounds")
 const multer = require('multer')
 const { storage } = require('../cloudinary')
 //store all our uploaded files
-const upload = multer({ storage })
+const upload = multer({ storage });
 
 router.route('/')
   .get(catchAsync(campgrounds.index))
