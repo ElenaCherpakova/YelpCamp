@@ -29,22 +29,22 @@ const seedDB = async () => {
       title: `${sample(descriptors)}, ${sample(places)} `,
       description: 'Camp provides a safe space for campers to be who they are and make long lasting friendships. Campers are encouraged to have fun, grow and develop their skills through activities such as canoeing, sailing, swimming, arts and crafts, and many other exciting activities.',
       price,
-      images:[
-          {
-            url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653608164/YelpCamp/r7ezwprw9qiyvxrqd7ng.jpg',
-            filename: 'YelpCamp/r7ezwprw9qiyvxrqd7ng'
-          },
-          {
-            url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653608164/YelpCamp/aa788uh7ildgpyjnpq2u.jpg',
-            filename: 'YelpCamp/aa788uh7ildgpyjnpq2u'
-          }
-        ]
+      images: [
+        {
+          url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653617333/YelpCamp/huhjnx7kw7fc3vly9d49.jpg',
+          filename: 'YelpCamp/huhjnx7kw7fc3vly9d49'
+        },
+        {
+          url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653617332/YelpCamp/w3tgmdhxi9sswe6zqeye.jpg',
+          filename: 'YelpCamp/w3tgmdhxi9sswe6zqeye'
+        }
+      ]
     })
     await camp.save()
   }
-
 }
 
 seedDB().then(() => {
   mongoose.connection.close()
 })
+
