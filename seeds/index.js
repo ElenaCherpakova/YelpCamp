@@ -27,16 +27,23 @@ const seedDB = async () => {
       author: "627fe8d9d11ec38e1320ce6b",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)}, ${sample(places)} `,
-      image: "https://source.unsplash.com/collection/483251",
       description: 'Camp provides a safe space for campers to be who they are and make long lasting friendships. Campers are encouraged to have fun, grow and develop their skills through activities such as canoeing, sailing, swimming, arts and crafts, and many other exciting activities.',
-      price
+      price,
+      images:[
+          {
+            url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653608164/YelpCamp/r7ezwprw9qiyvxrqd7ng.jpg',
+            filename: 'YelpCamp/r7ezwprw9qiyvxrqd7ng'
+          },
+          {
+            url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653608164/YelpCamp/aa788uh7ildgpyjnpq2u.jpg',
+            filename: 'YelpCamp/aa788uh7ildgpyjnpq2u'
+          }
+        ]
     })
     await camp.save()
   }
 
 }
-
-
 
 seedDB().then(() => {
   mongoose.connection.close()
