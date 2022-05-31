@@ -29,15 +29,15 @@ const seedDB = async () => {
       title: `${sample(descriptors)}, ${sample(places)} `,
       description: 'Camp provides a safe space for campers to be who they are and make long lasting friendships. Campers are encouraged to have fun, grow and develop their skills through activities such as canoeing, sailing, swimming, arts and crafts, and many other exciting activities.',
       price,
+      geometry: {
+        type: "Point",
+        coordinates: [-119.699375153073, 37.0743595873]
+      },
       images: [
         {
-          url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653617333/YelpCamp/huhjnx7kw7fc3vly9d49.jpg',
-          filename: 'YelpCamp/huhjnx7kw7fc3vly9d49'
+          url: "https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1654039228/YelpCamp/nfd0ac2ixpvvhgx114x7.jpg",
+          filename: "YelpCamp/nfd0ac2ixpvvhgx114x7"
         },
-        {
-          url: 'https://res.cloudinary.com/elena-cherpakova-yelp-camp/image/upload/v1653617332/YelpCamp/w3tgmdhxi9sswe6zqeye.jpg',
-          filename: 'YelpCamp/w3tgmdhxi9sswe6zqeye'
-        }
       ]
     })
     await camp.save()
