@@ -18,6 +18,10 @@ module.exports.createCampground = async (req, res, next) => {
     limit: 1
   }).send()
   const campground = new Campground(req.body.campground);
+  if (!geoData.body.features.length) {
+    req.flash('error', 'Location is not Found!')
+    return res.redirect('/campgrounds/new')
+  }
   campground.geometry = geoData.body.features[0].geometry;
   //map array and store path and filename as an obj in req.files
   campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
