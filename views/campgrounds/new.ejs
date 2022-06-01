@@ -1,8 +1,8 @@
 <% layout('layouts/boilerplate') %>
   <div class="row">
     <h1 class="text-center">New Campground</h1>
-
-    <div class="col-6 offset-3">
+    <div class="col-md-6 offset-md-3">
+   
       <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
         <div class="mb-3">
           <label class="form-label" for="title">Title</label>
@@ -51,13 +51,13 @@
           </div>
         </div>
         <div class="mb-3">
-          <button class="btn btn-success">Add Campground</button>
+          <button class="btn btn-success w-100">Add Campground</button>
         </div>
-
       </form>
       <a href="/campgrounds">Back To All Campgrounds</a>
     </div>
   </div>
+
 
 <script>
   // Example starter JavaScript for disabling form submissions if there are invalid fields

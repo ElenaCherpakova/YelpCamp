@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="/stylesheets/stars.css" />
 <div class="row">
   <div class="col-6">
-    <div id="map" style="width: 400px; height: 300px;"></div>
 
     <div id="campCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
@@ -61,22 +60,14 @@
       </div>
     </div>
   </div>
+ </div>
   <div class="col-6">
-    
+    <div id="map"></div>
+
     <% if (currentUser) { %>
-    <h2>Leave a Review</h2>
-    <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
-      <!-- <div class="mb-3">
-        <label for="rating">Rating</label>
-        <input
-          class="form-range"
-          type="range"
-          min="1"
-          max="5"
-          name="review[rating]"
-          id="rating"
-        />
-      </div> -->
+    <h3 class="mt-2">Leave a review</h3>
+    <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form text-center" novalidate>
+
 
       <fieldset class="starability-growRotate">
 
@@ -102,7 +93,8 @@
       </div>
       <button class="btn btn-success">Submit</button>
     </form>
-    <% } %> <% for (let review of campground.reviews) { %>
+    <% } %> 
+    <% for (let review of campground.reviews) { %>
     <div class="mb-2 mt-2">
       <div class="card">
         <div class="mb-3 card-body">
@@ -129,7 +121,9 @@
       <% } %>
     </div>
   </div>
-</div>
+
+
+
 
 <script>
   const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
