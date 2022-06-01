@@ -15,9 +15,7 @@
         </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">
-                  <%=campground.title%>
-                </h5>
+                <h5 class="card-title"><%=campground.title%></h5>
                 <p class="card-text">
                   <%=campground.description%>
                 </p>
@@ -33,7 +31,9 @@
     </div>
     <% } %>
 
-    <script>
-      const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
-    </script>
+  <script>
+    const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+    const campgrounds = {features: <%- JSON.stringify(campgrounds)%>}
+  </script>
+
     <script src="/javascripts/clusterMap.js"></script>

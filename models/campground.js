@@ -8,6 +8,7 @@ const ImageSchema = new Schema({
   filename: String
 })
 
+const opts = { toJSON: { virtuals: true } }
 //We store url image in our MongoDB and we just derive(take) from the info that we're already store
 //every time we call thumbnail, it's going to do this calculation
 ImageSchema.virtual('thumbnail').get(function () {
@@ -42,7 +43,7 @@ const CampgroundSchema = new Schema({
       ref: 'Review'
     }
   ]
-})
+}, opts)
 
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) {
@@ -54,6 +55,9 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
     })
   }
 })
-
+CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
+  return `<strong><a href="/campgrounds/${this._id}">${this.title}</a></strong>
+  <p>${this.description.substring(0, 30)}...</p>`
+})
 
 module.exports = mongoose.model('Campground', CampgroundSchema)
