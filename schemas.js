@@ -1,5 +1,5 @@
 const BaseJoi = require('joi')
-const sanitizeHTML = require('sanitize-html')
+const sanitizeHtml = require('sanitize-html')
 
 
 const extension = (joi) => ({
@@ -11,12 +11,12 @@ const extension = (joi) => ({
   rules: {
     escapeHTML: {
       validate(value, helpers) {
-        const clean = sanitizeHTML(value, {
+        const clean = sanitizeHtml(value, {
           allowedTags: [],
           allowedAttributes: {},
         });
         if (clean !== value) return helpers.error("string.escapeHTML", { value })
-        return clean();
+        return clean;
       }
     }
   }
