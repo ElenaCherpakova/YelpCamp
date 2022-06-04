@@ -4,9 +4,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 
 const express = require("express");
-const app = express();
 const path = require('path')
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash')
@@ -24,14 +23,12 @@ const mongoSanitize = require('express-mongo-sanitize');
 const userRoutes = require('./routes/users')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
+// const dbUrl = process.env.DB_URL
 
-
-mongoose.connect('mongodb://localhost:27017/yelp-camp'), {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-}
+mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+  // useNewUrlParser: true,
+  // useUnifiedTopology: true,
+})
 
 //connect Database
 const db = mongoose.connection;
@@ -40,6 +37,7 @@ db.once('open', () => {
   console.log('Database connected')
 });
 
+const app = express();
 app.engine('ejs', ejsMate)
 app.set('view engine', "ejs")
 app.set("views", path.join(__dirname, "views"))
@@ -98,28 +96,28 @@ const connectSrcUrls = [
   "https://events.mapbox.com",
   "https://res.cloudinary.com/elena-cherpakova-yelp-camp/"
 ];
-const fontSrcUrls = [ "https://res.cloudinary.com/elena-cherpakova-yelp-camp/" ];
+const fontSrcUrls = ["https://res.cloudinary.com/elena-cherpakova-yelp-camp/"];
 
 app.use(
   helmet.contentSecurityPolicy({
-      directives : {
-          defaultSrc : [],
-          connectSrc : [ "'self'", ...connectSrcUrls ],
-          scriptSrc  : [ "'unsafe-inline'", "'self'", ...scriptSrcUrls ],
-          styleSrc   : [ "'self'", "'unsafe-inline'", ...styleSrcUrls ],
-          workerSrc  : [ "'self'", "blob:" ],
-          objectSrc  : [],
-          imgSrc     : [
-              "'self'",
-              "blob:",
-              "data:",
-              "https://res.cloudinary.com/elena-cherpakova-yelp-camp/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
-              "https://images.unsplash.com/"
-          ],
-          fontSrc    : [ "'self'", ...fontSrcUrls ],
-          mediaSrc   : [ "https://res.cloudinary.com/elena-cherpakova-yelp-camp/" ],
-          childSrc   : [ "blob:" ]
-      }
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/elena-cherpakova-yelp-camp/", //SHOULD MATCH YOUR CLOUDINARY ACCOUNT!
+        "https://images.unsplash.com/"
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+      mediaSrc: ["https://res.cloudinary.com/elena-cherpakova-yelp-camp/"],
+      childSrc: ["blob:"]
+    }
   })
 );
 
@@ -167,5 +165,5 @@ app.use((err, req, res, next) => {
 
 app.listen(3000, () => {
   console.log("Listening on PORT 3000")
-}) 
+})
 
