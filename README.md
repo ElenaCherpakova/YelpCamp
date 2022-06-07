@@ -31,7 +31,8 @@ CLOUDINARY_SECRET="<API Secret>"
 DB_URL="<url>"
 MAPBOX_TOKEN="<API Key>"
 ```
-7. Start the web server using ```nodemon app.js``` in the terminal with the project and run ```mongo``` in another terminal 
+7. Start the web server using ```nodemon app.js``` in the terminal with the project and run ```mongo``` in another terminal.
+
 The app will be served at <http://localhost:3000/>.
 
 8. Go to <http://localhost:3000/> in your browser.
