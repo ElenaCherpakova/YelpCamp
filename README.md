@@ -30,7 +30,6 @@ CLOUDINARY_KEY="<API Key>"
 CLOUDINARY_SECRET="<API Secret>"
 DB_URL="<url>"
 MAPBOX_TOKEN="<API Key>"
-
 ```
 6. Run ```mongod``` in another terminal and ```nodemon app.js``` in the terminal with the project.  
 
