@@ -33,7 +33,7 @@ body {
 }
 
 
-#home-landing, #nav-landing{
+#nav-landing, #main-landing, #foot-landing{
   z-index:1;
 }
 
