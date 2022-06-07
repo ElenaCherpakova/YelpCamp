@@ -22,8 +22,7 @@ git clone https://github.com/ElenaCherpakova/YelpCamp.git
 cd YelpCamp
 npm install
 ```
-5. Install dependencies using the `npm install` command.
-6. Create .env file in the root of the project and add the following: 
+5. Create .env file in the root of the project and add the following: 
 ```
 CLOUDINARY_CLOUD_NAME = "<nameOfFile>"
 CLOUDINARY_KEY="<API Key>"
@@ -31,9 +30,9 @@ CLOUDINARY_SECRET="<API Secret>"
 DB_URL="<url>"
 MAPBOX_TOKEN="<API Key>"
 ```
-7. Start the web server using ```nodemon app.js``` in the terminal with the project and run ```mongo``` in another terminal. The app will be served at <http://localhost:3000/>.
+6. Start the web server using ```nodemon app.js``` in the terminal with the project and run ```mongo``` in another terminal. The app will be served at <http://localhost:3000/>.
 
-8. Go to <http://localhost:3000/> in your browser.
+7. Go to <http://localhost:3000/> in your browser.
 
 ## Dependencies
 
