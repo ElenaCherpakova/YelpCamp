@@ -41,9 +41,13 @@ The app will be served at <http://localhost:3000/>.
 ## Dependencies
 
 - Node.js
-- Express
+- Express v4.17.3
 - EJS
 - bcrypt
 - body-parser
 - cookie-session
+- joi v17.6.0
+- mongoose v6.3.2
+- nodemon
+- cloudinary v1.30.0
 
