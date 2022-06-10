@@ -4,7 +4,8 @@
 
 YelpCamp is a website where users can create and review campgrounds.
 
-## Features, as a User: 
+## Features
+### As a user: 
 * able to register, log in, log out and update their profile;
 * able to create, edit, and remove campgrounds
 * able to review campgrounds or remove their review, edit review(in process)
@@ -40,9 +41,13 @@ The app will be served at <http://localhost:3000/>.
 ## Dependencies
 
 - Node.js
-- Express
+- Express 4.17.3
 - EJS
 - bcrypt
 - body-parser
 - cookie-session
+- joi 17.6.0
+- mongoose 6.3.2
+- nodemon
+- cloudinary 1.30.0
 
