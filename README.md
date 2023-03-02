@@ -1,6 +1,6 @@
 # YelpCamp
 
-<a href="https://yelpcamp-elenacherpakova.onrender.com/">YelpCamp on Heroku</a>
+<a href="https://yelpcamp-elenacherpakova.onrender.com/">YelpCamp on Render</a>
 
 ## Project Description 
 
